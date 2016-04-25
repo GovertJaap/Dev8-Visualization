@@ -1,25 +1,38 @@
 package les1;
 
+import org.json.simple.JSONObject;
 import processing.core.PApplet;
 
-public class Main extends PApplet {
+public class Main extends PApplet
+{
+    private static JSONObject earthQuakeJsonObject = new JSONObject();
 
-    public void settings() {
-        size(512, 512);
+
+    public void settings()
+    {
+
     }
 
-    public void setup() {
-        background(0);
+    public void setup()
+    {
+
     }
 
-    public void draw(){
-        stroke(255);
-        if (mousePressed) {
-            line(mouseX,mouseY,pmouseX,pmouseY);
-        }
+    public void draw()
+    {
     }
 
     public static void main(String[] args) {
-        PApplet.main(new String[] { Main.class.getName() });
+        JSONGetter jsonGetter = new JSONGetter();
+
+        try
+        {
+            Main.earthQuakeJsonObject = jsonGetter.getJSONArray("http://apis.is/earthquake/is");
+            PApplet.main(new String[] { Main.class.getName() });
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
